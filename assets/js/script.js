@@ -19,9 +19,8 @@ $(document).ready(function(){
   var arrNumber = [];
   var arrResult = [];
 
-  $('#restart').click(function(){
-    reset();
-    //tutto quello sotto qui dentro
+  $('#reset').click(function(){
+    location.reload();
   });
 
   $('#btn-start').click(function(){
@@ -69,15 +68,15 @@ $(document).ready(function(){
             arrResult.push(numberUser);
             printOutput('I numeri indovinati sono ' + arrResult.join(), '#display');
             console.log(arrResult);
-            $('#restart').show();
+            $('#reset').show();
           }
           if(arrResult.length === 0){
             printOutput('Hai perso', '#display');
-            $('#restart').show();
+            $('#reset').show();
           }
           if(arrResult.length === arrRandom.length){
             printOutput('BRAVO.. hai indovinato tutti i numeri', '#display');
-            $('#restart').show();
+            $('#reset').show();
           }
         }
         
@@ -95,7 +94,7 @@ function reset(){
   printOutput('Pronto?.. Clicca VIA!', '#display');
   $('#btn-start').show();
   $('#btn-box').hide();
-  $('#restart').hide();
+  $('#reset').hide();
   $('#nmb').val('');
 };
 
