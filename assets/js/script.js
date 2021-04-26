@@ -46,9 +46,12 @@ $(document).ready(function(){
       printOutput('Calcolo in corso', '#display');
       $('#btn-box').hide();
       setTimeout(function(){
-        if(arrRandom.includes(arrNumber.includes())){
-          arrResult.push(arrNumber.includes());
-          printOutput('I numeri indovinati sono' + arrResult, '#display');
+        for(var i = 0; i<arrRandom; i++){
+          var numberUser = arrRandom[i];
+          if(arrNumber.includes(numberUser)){
+            arrResult.push(numberUser);
+            printOutput('I numeri indovinati sono' + arrResult, '#display');
+          }
         }
       },5000);
 
@@ -65,7 +68,7 @@ function reset(){
   printOutput('Pronto?.. Clicca VIA!', '#display');
   $('#btn-start').show();
   $('#btn-box').hide();
-  $('#reload').hide();
+  $('#restart').hide();
   $('#nmb').val('');
 };
 
