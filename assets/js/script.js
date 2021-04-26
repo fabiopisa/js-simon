@@ -18,6 +18,7 @@ $(document).ready(function(){
   var arrResult = [];
 
   $('#btn-start').click(function(){
+
     $(this).hide();
     while(arrRandom.length < 5){
       arrRandom.push(generatorRandomNumber(1,100));
@@ -35,22 +36,37 @@ $(document).ready(function(){
 
   $('#btn-send').click(function(){
     
-    while(arrNumber.length === arrRandom.length){
+    if(arrNumber.includes( $('#nmb').val())){
+      alert(' ATTENZIONE...Numero già scelto!!');
+      $('#nmb').val('');
+    }else if(arrNumber.length < arrRandom.length){
       arrNumber.push($('#nmb').val());
       $('#nmb').val('');
+    }else{ 
+      printOutput('Calcolo in corso', '#display');
+      $('#btn-box').hide();
+      setTimeout(function(){
+        if(arrRandom.includes(arrNumber.includes())){
+          arrResult.push(arrNumber.includes());
+          printOutput('I numeri indovinati sono' + arrResult, '#display');
+        }
+      },5000);
+
     }
+    
     console.log(arrNumber);
   });
+  
 
-
-
-})
+});
 
 //FUNZIONI
 function reset(){
   printOutput('Pronto?.. Clicca VIA!', '#display');
   $('#btn-start').show();
   $('#btn-box').hide();
+  $('#reload').hide();
+  $('#nmb').val('');
 };
 
 function printOutput (text, target){
