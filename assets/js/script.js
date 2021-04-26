@@ -21,6 +21,7 @@ $(document).ready(function(){
 
   $('#restart').click(function(){
     reset();
+    //tutto quello sotto qui dentro
   });
 
   $('#btn-start').click(function(){
