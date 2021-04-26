@@ -50,6 +50,9 @@ $(document).ready(function(){
     if(arrNumber.includes(parseInt(nmbUser))){
       alert(' ATTENZIONE...Numero già scelto!!');
       $('#nmb').val('');
+    }else if(parseInt(nmbUser) < 1){
+      alert(' ATTENZIONE...Numero non valido!!');
+      $('#nmb').val('');
     }else{
       arrNumber.push(parseInt(nmbUser));
       $('#nmb').val('');
@@ -64,11 +67,17 @@ $(document).ready(function(){
     
           if(arrNumber.includes(numberUser)){
             arrResult.push(numberUser);
-            printOutput('I numeri indovinati sono ' + arrResult, '#display');
+            printOutput('I numeri indovinati sono ' + arrResult.join(), '#display');
             console.log(arrResult);
             $('#restart').show();
-          }else{
+          }
+          if(arrResult.length === 0){
             printOutput('Hai perso', '#display');
+            $('#restart').show();
+          }
+          if(arrResult.length === arrRandom.length){
+            printOutput('BRAVO.. hai indovinato tutti i numeri', '#display');
+            $('#restart').show();
           }
         }
         
