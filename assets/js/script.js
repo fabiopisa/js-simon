@@ -3,7 +3,7 @@ simon-dice
 1. Al via il computer genera 5 numeri
 2. Vengono mostrati per 5 secondi i numeri generati
 3. L'utente deve indovinare i 5 numeri
-4. Quindi c'è un'attesa di 5 secondi perchè il computer mostra calcolo in corso
+4. Quindi c'è un'attesa di 3 secondi perchè il computer mostra calcolo in corso
 5. Vengono mostrati i numeri indovinati
 6. Opzionale:
 	- alla fine far apparire un bottone “restart”
@@ -27,7 +27,11 @@ $(document).ready(function(){
 
     $(this).hide();
     while(arrRandom.length < selectNumber){
-      arrRandom.push(generatorRandomNumber(1,100));
+      var nmbRandom = generatorRandomNumber(1,100)
+      if(arrRandom.includes(nmbRandom)){
+      }else{
+        arrRandom.push(nmbRandom);
+      }
     }
     console.log(arrRandom)
 
@@ -36,17 +40,16 @@ $(document).ready(function(){
     setTimeout(function(){
       printOutput('Indovina i numeri', '#display');
       $('#btn-box').show();
-    }, 2000);
+    }, 5000);
 
   });
 
   $('#btn-send').click(function(){
-    
-    if(arrNumber.includes( $('#nmb').val())){
+    var nmbUser = $('#nmb').val();
+    if(arrNumber.includes(parseInt(nmbUser))){
       alert(' ATTENZIONE...Numero già scelto!!');
       $('#nmb').val('');
     }else{
-      var nmbUser = $('#nmb').val();
       arrNumber.push(parseInt(nmbUser));
       $('#nmb').val('');
     }
@@ -63,10 +66,12 @@ $(document).ready(function(){
             printOutput('I numeri indovinati sono ' + arrResult, '#display');
             console.log(arrResult);
             $('#restart').show();
+          }else{
+            printOutput('Hai perso', '#display');
           }
         }
         
-      },2000);
+      },3000);
 
     }
     
