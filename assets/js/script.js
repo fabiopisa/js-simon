@@ -11,16 +11,22 @@ simon-dice
  */
 
 $(document).ready(function(){
+  var selectNumber = parseInt(prompt('con quanti numeri vuoi giocare?'))
+
   reset();
   // array dei numeri ramdom generati dal computer
   var arrRandom = [];
   var arrNumber = [];
   var arrResult = [];
 
+  $('#restart').click(function(){
+    reset();
+  });
+
   $('#btn-start').click(function(){
 
     $(this).hide();
-    while(arrRandom.length < 5){
+    while(arrRandom.length < selectNumber){
       arrRandom.push(generatorRandomNumber(1,100));
     }
     console.log(arrRandom)
@@ -28,9 +34,9 @@ $(document).ready(function(){
     printOutput(arrRandom.toString(),'#display')
 
     setTimeout(function(){
-      printOutput('Indovina i 5 numeri', '#display');
+      printOutput('Indovina i numeri', '#display');
       $('#btn-box').show();
-    }, 5000);
+    }, 2000);
 
   });
 
@@ -39,27 +45,33 @@ $(document).ready(function(){
     if(arrNumber.includes( $('#nmb').val())){
       alert(' ATTENZIONE...Numero già scelto!!');
       $('#nmb').val('');
-    }else if(arrNumber.length < arrRandom.length){
-      arrNumber.push($('#nmb').val());
+    }else{
+      var nmbUser = $('#nmb').val();
+      arrNumber.push(parseInt(nmbUser));
       $('#nmb').val('');
-    }else{ 
+    }
+
+    if(arrNumber.length === arrRandom.length){ 
       printOutput('Calcolo in corso', '#display');
       $('#btn-box').hide();
       setTimeout(function(){
-        for(var i = 0; i<arrRandom; i++){
+        for(var i = 0; i<arrRandom.length; i++){
           var numberUser = arrRandom[i];
+    
           if(arrNumber.includes(numberUser)){
             arrResult.push(numberUser);
-            printOutput('I numeri indovinati sono' + arrResult, '#display');
+            printOutput('I numeri indovinati sono ' + arrResult, '#display');
+            console.log(arrResult);
+            $('#restart').show();
           }
         }
-      },5000);
+        
+      },2000);
 
     }
     
     console.log(arrNumber);
   });
-  
 
 });
 
